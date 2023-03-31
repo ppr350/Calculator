@@ -19,7 +19,7 @@
 
 html {
     font-family: "Open Sans", sans-serif;
-    color: black;
+    color: white;
     font-size: 62.5%;
 }
 
@@ -32,22 +32,24 @@ body {
 }
 
 .container {
-    width: min(90%, 500px);
+    width: min(90%, 400px);
     margin-inline: auto;
-    background-color: rgb(115, 115, 115);
-    border: 2px solid blue;
-    border-radius: 10px;
+    margin-top: 3em;
+    background-color: rgb(50, 50, 50);
+    border: 0.5px solid black;
+    /*border-radius: 10px;*/
     box-shadow: 0 0 1em black;
 }
 
 .output {
-    border: 2px solid pink;
+    border: 0.5px solid black;
+    /*padding: 0 1rem 0 1rem;*/
 }
 
 .button_section {
     display: grid;
     grid-template-columns: auto auto auto auto;
-    /* this is here to get rid of the gap between buttons */
+    /* this below is here to get rid of the gap between buttons */
     font-size: 0;
 }
 
@@ -58,7 +60,46 @@ body {
 .key_operator,
 .key_number {
     font-size: var(--step-1);
-    border: 2px solid green;
+    border: 0.5px solid black;
     padding: max(1vh, 1rem);
+    color: white;
+}
 
+.key_all_clear,
+.key_clear_entry {
+    background-color: rgb(64, 64, 64);
+}
+
+.key_number,
+.key_decimal {
+    background-color: gray;
+}
+
+.key_operator,
+.key_equal {
+    background-color: orange;
+}
+
+.zero_span_two {
+    grid-column: 1 / 3;
+    grid-row: 5 / 6;
+}
+
+.clear_entry_span_two {
+    grid-column: 2 / 4;
+}
+
+.key_decimal:hover,
+.key_equal:hover,
+.key_number:hover {
+    background-color: rgb(160, 160, 160);
+}
+
+.key_clear_entry:hover,
+.key_all_clear:hover {
+    background-color: rgb(89, 89, 89);
+}
+
+.key_operator:hover {
+    background-color: rgb(255, 185, 55);
 }
