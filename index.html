@@ -12,33 +12,33 @@
     <title>CALCULATOR</title>
 </head>
 <body>
-    <div class="container">
+    <div class="calculator">
         <div class="output">
             <div class="previous-operand">220+140</div>
             <div class="current-operand">360</div>
         </div>
         
         <div class="button_section">
-            <button class="key_all_clear">AC</button>
-            <button class="key_clear_entry clear_entry_span_two">CE</button>
-            <button class="key_operator">÷</button>
+            <button class="key_all_clear" data-action="all_clear">AC</button>
+            <button class="key_clear_entry clear_entry_span_two" data-action="clear_entry">CE</button>
+            <button class="key_operator" data-action="divide">÷</button>
             <button class="key_number">7</button>
             <button class="key_number">8</button>
             <button class="key_number">9</button>
-            <button class="key_operator">x</button>
+            <button class="key_operator" data-action="multiply">x</button>
             <button class="key_number">4</button>
             <button class="key_number">5</button>
             <button class="key_number">6</button>
-            <button class="key_operator">-</button>
+            <button class="key_operator" data-action="subtract">-</button>
             <button class="key_number">1</button>
             <button class="key_number">2</button>
             <button class="key_number">3</button>
-            <button class="key_operator">+</button>
+            <button class="key_operator" data-action="add">+</button>
             <button class="key_number zero_span_two">0</button>
-            <button class="key_decimal">.</button>
-            <button class="key_equal">=</button>
+            <button class="key_decimal" data-action="decimal">.</button>
+            <button class="key_equal" data-action="calculate">=</button>
         </div>
 
     </div>
-</body>
+</body> 
 </html>

@@ -31,7 +31,7 @@ body {
     background-color: rgb(48, 48, 48);
 }
 
-.container {
+.calculator {
     width: min(90%, 400px);
     margin-inline: auto;
     margin-top: 3em;
