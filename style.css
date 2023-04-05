@@ -41,6 +41,14 @@ body {
     box-shadow: 0 0 1em black;
 }
 
+.button_section > button {
+    cursor: pointer;
+    font-size: var(--step-1);
+    border: 0.5px solid black;
+    padding: max(1vh, 1rem);
+    color: white;
+}
+
 .output {
     border: 0.5px solid black;
     /*padding: 0 1rem 0 1rem;*/
@@ -53,7 +61,7 @@ body {
     font-size: 0;
 }
 
-.key_decimal,
+/*.key_decimal,
 .key_equal,
 .key_all_clear,
 .key_clear_entry,
@@ -63,7 +71,7 @@ body {
     border: 0.5px solid black;
     padding: max(1vh, 1rem);
     color: white;
-}
+}*/
 
 .key_all_clear,
 .key_clear_entry {
@@ -90,7 +98,6 @@ body {
 }
 
 .key_decimal:hover,
-.key_equal:hover,
 .key_number:hover {
     background-color: rgb(160, 160, 160);
 }
@@ -100,6 +107,7 @@ body {
     background-color: rgb(89, 89, 89);
 }
 
-.key_operator:hover {
+.key_operator:hover,
+.key_equal:hover {
     background-color: rgb(255, 185, 55);
 }
