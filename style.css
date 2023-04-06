@@ -37,7 +37,6 @@ body {
     margin-top: 3em;
     background-color: rgb(50, 50, 50);
     border: 0.5px solid black;
-    /*border-radius: 10px;*/
     box-shadow: 0 0 1em black;
 }
 
@@ -51,7 +50,11 @@ body {
 
 .output {
     border: 0.5px solid black;
-    /*padding: 0 1rem 0 1rem;*/
+    padding: 0 1rem 0 1rem;
+}
+
+.previous-operand {
+    font-size: var(--step-1);
 }
 
 .button_section {
@@ -60,18 +63,6 @@ body {
     /* this below is here to get rid of the gap between buttons */
     font-size: 0;
 }
-
-/*.key_decimal,
-.key_equal,
-.key_all_clear,
-.key_clear_entry,
-.key_operator,
-.key_number {
-    font-size: var(--step-1);
-    border: 0.5px solid black;
-    padding: max(1vh, 1rem);
-    color: white;
-}*/
 
 .key_all_clear,
 .key_clear_entry {

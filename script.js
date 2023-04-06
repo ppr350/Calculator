@@ -21,14 +21,24 @@ keys.addEventListener("click", e => {
             action == "subtract" ||
             action == "multiply" ||
             action == "divide"
-        ) {
-            console.log("operator key")
+        ) { 
+            if (previousOperand.textContent/*more code here*/) {
+                // Code here to replace the last operator to the newly pressed operator
+                 
+            } if (previousOperand.textContent === "0") {
+                previousOperand.textContent = currentOperand.textContent + " " + keyContent;
+            } else {
+                previousOperand.textContent += " " + currentOperand.textContent + " " + keyContent + " "
+            }
+            currentOperand.textContent = "0";
         } if (action === "decimal") {
             if (displayedNum.includes(".")) {
-                // Code here to skip the second decimal point //
-            }
-            else {
+            /* No code here except for a "return" statement so it won't input anything at all...
+            and it also won't run outside of the if-else */
+            return;
+            } else {
                 currentOperand.textContent = displayedNum + keyContent
+                console.log("decimal point")
             }
         } if (action === "all_clear") {
             console.log("all clear")
@@ -40,3 +50,6 @@ keys.addEventListener("click", e => {
     }
 })
 
+let num1 = "";
+let num2 = "";
+let operator = "";
