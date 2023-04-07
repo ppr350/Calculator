@@ -102,3 +102,18 @@ body {
 .key_equal:hover {
     background-color: rgb(255, 185, 55);
 }
+
+.key_decimal:active,
+.key_number:active {
+    background-color: rgb(55, 55, 55);
+}
+
+.key_clear_entry:active,
+.key_all_clear:active {
+    background-color: rgb(49, 49, 49);
+}
+
+.key_operator:active,
+.key_equal:active {
+    background-color: rgb(169, 124, 39);
+}
