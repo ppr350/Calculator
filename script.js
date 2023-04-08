@@ -36,9 +36,15 @@ keys.addEventListener("click", e => {
 
                 currentOperand.textContent = keyContent
 
+                // log the input to previousInput :
+                newInput = keyContent
+
             // append the newly pressed number at the end of the current_operand :
             } else {
                 currentOperand.textContent = displayedNum + keyContent
+
+                // log the input to previousInput :
+                newInput = keyContent
             }
             console.log("number key")
 
@@ -51,16 +57,25 @@ keys.addEventListener("click", e => {
         ) { 
 
             // if the last value in previousOperand is an operator, update it to the newly pressed operator :
-            if (previousOperand.textContent/*more code here*/) {
-                // Code here to replace the last operator to the newly pressed operator
+            if (previousOperand.textContent = "") {
+                // Code here to replace the last operator to the newly pressed operator :
+                console.log("detected")
+                // log the input to newInput :
+                // newInput = keyContent
                  
             // if previousOperand shows "0"; replace it with the currentOperand value + the newly pressed operator :
             } if (previousOperand.textContent === "0") {
                 previousOperand.textContent = currentOperand.textContent + " " + keyContent;
 
+                // log the input to newInput :
+                newInput = keyContent
+
             // if previousOperand is not at its default mode, append the value in currentOperand to it :
             } else {
                 previousOperand.textContent += " " + currentOperand.textContent + " " + keyContent + " "
+
+                // log the input to previousInput :
+                newInput = keyContent
             }
 
             // change currentOperand to default mode "0" :
@@ -109,3 +124,11 @@ keys.addEventListener("click", e => {
 let num1 = "";
 let num2 = "";
 let operator = "";
+
+// track the proviously pressed input
+let newInput = "";
+
+// function to trasfer previousInput = ""
+function previousInput() {
+
+}
