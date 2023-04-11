@@ -38,15 +38,16 @@ keys.addEventListener("click", e => {
 
                 // log the input to previousInput :
                 newInput = keyContent
+                console.log(`SCENARIO 01: currentOperand (displayNum) was "0" before "${keyContent}" was entered.`)
 
             // append the newly pressed number at the end of the current_operand :
             } else {
+                console.log(`SCENARIO 02: currentOperand has value "${displayedNum}" and now will have "${keyContent}" append to it.`)
                 currentOperand.textContent = displayedNum + keyContent
 
                 // log the input to previousInput :
                 newInput = keyContent
             }
-            console.log("number key")
 
         // if the button pressed is operator button :
         } if (
@@ -57,16 +58,16 @@ keys.addEventListener("click", e => {
         ) { 
 
             // if the last value in previousOperand is an operator, update it to the newly pressed operator :
-            if (previousOperand.textContent = "") {
+            if (previousOperand.textContent = "0") {
                 // Code here to replace the last operator to the newly pressed operator :
-                console.log("detected")
+
                 // log the input to newInput :
                 // newInput = keyContent
                  
             // if previousOperand shows "0"; replace it with the currentOperand value + the newly pressed operator :
             } if (previousOperand.textContent === "0") {
                 previousOperand.textContent = currentOperand.textContent + " " + keyContent;
-
+                console.log(`previousOperand was "0" and now replaced by "${displayedNum} ${key.textContent}"`)
                 // log the input to newInput :
                 newInput = keyContent
 
