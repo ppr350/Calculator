@@ -10,6 +10,15 @@ const previousOperand = document.querySelector(".previous-operand")
 // link the current_operand class
 const currentOperand = document.querySelector(".current-operand")
 
+// place to store the values and operator for calculation :
+let num1 = "";
+let num2 = "";
+let operator = "";
+
+// track the proviously pressed input
+let newInput = "";
+let oldInput = "none";
+
 // when a button is pressed :
 keys.addEventListener("click", e => {
 
@@ -40,13 +49,20 @@ keys.addEventListener("click", e => {
                 newInput = keyContent
                 console.log(`SCENARIO 01: currentOperand (displayNum) was "0" before "${keyContent}" was entered.`)
 
+                console.log(`old input is ${oldInput}`)
+                console.log(`new input is ${newInput}`)
+
             // append the newly pressed number at the end of the current_operand :
             } else {
                 console.log(`SCENARIO 02: currentOperand has value "${displayedNum}" and now will have "${keyContent}" append to it.`)
                 currentOperand.textContent = displayedNum + keyContent
 
                 // log the input to previousInput :
-                newInput = keyContent
+                oldInput = newInput;
+                // log the new input to newInput :
+                newInput = keyContent;
+                console.log(`old input is ${oldInput}`);
+                console.log(`new input is ${newInput}`);
             }
 
         // if the button pressed is operator button :
@@ -56,9 +72,22 @@ keys.addEventListener("click", e => {
             action == "multiply" ||
             action == "divide"
         ) { 
+            oldInput = newInput;
+            newInput = action;
+            // log the previous input to oldInput :
+            console.log(`old input is ${oldInput}`);
+            console.log(`new input is ${newInput}`);
+
+            // if the value in currentOperand is "0", do nothing :
+            if (currentOperand.textContent === "0") {
+                if (action == "substract") {
+                    currentOperand.textContent = keyContent;
+                } else {
+                    // code here
+                }
 
             // if the last value in previousOperand is an operator, update it to the newly pressed operator :
-            if (previousOperand.textContent = "0") {
+            } if (previousOperand.textContent = "0") {
                 // Code here to replace the last operator to the newly pressed operator :
 
                 // log the input to newInput :
@@ -76,7 +105,7 @@ keys.addEventListener("click", e => {
                 previousOperand.textContent += " " + currentOperand.textContent + " " + keyContent + " "
 
                 // log the input to previousInput :
-                newInput = keyContent
+                newInput === keyContent
             }
 
             // change currentOperand to default mode "0" :
@@ -99,8 +128,13 @@ keys.addEventListener("click", e => {
 
         // if the button pressed is "AC" :
         } if (action === "all_clear") {
+            // clear everything on screen (default mode):
+            currentOperand.textContent = "0";
+            previousOperand.textContent = "0";
 
-            // it clear everything on both screen and return the calculator to default mode :
+            // clear everything on log history :
+            oldInput = "";
+            newInput = "";
             console.log("all clear")
 
         // if the button pressed is "CE" :
@@ -120,14 +154,6 @@ keys.addEventListener("click", e => {
         }
     }
 })
-
-// place to store the values and operator for calculation :
-let num1 = "";
-let num2 = "";
-let operator = "";
-
-// track the proviously pressed input
-let newInput = "";
 
 // function to trasfer previousInput = ""
 function previousInput() {
