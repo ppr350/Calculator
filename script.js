@@ -37,6 +37,9 @@ keys.addEventListener("click", e => {
         // make a variable called "displayNum" and chain it with the global scope "currendOperand" to access the value in it :
         const displayedNum = currentOperand.textContent
 
+        // make a variable called "upperDisplayNum" and chain it with the global scope "previousOperand" to access the value in it :
+        const upperDisplayNum = previousOperand.textContent
+
         // if the button pressed is number button :
         if (!action) {
 
@@ -72,58 +75,86 @@ keys.addEventListener("click", e => {
             action == "multiply" ||
             action == "divide"
         ) { 
-            oldInput = newInput;
+            /*oldInput = newInput;
             newInput = action;
             // log the previous input to oldInput :
             console.log(`old input is ${oldInput}`);
-            console.log(`new input is ${newInput}`);
+            console.log(`new input is ${newInput}`);*/
 
             // if the value in currentOperand is "0", do nothing :
-            if (currentOperand.textContent === "0") {
-                if (action == "substract") {
-                    currentOperand.textContent = keyContent;
-                } else {
-                    // code here
-                }
+            /*if (action === newInput) {
+                console.log("detected 2 actions successfully")
+                newInput === action;
+                const lastChar = previousOperand.textContent.slice(-2)
+                console.log(lastChar)
 
-            // if the last value in previousOperand is an operator, update it to the newly pressed operator :
-            } if (previousOperand.textContent = "0") {
                 // Code here to replace the last operator to the newly pressed operator :
 
                 // log the input to newInput :
                 // newInput = keyContent
-                 
-            // if previousOperand shows "0"; replace it with the currentOperand value + the newly pressed operator :
-            } if (previousOperand.textContent === "0") {
+                    
+                // if previousOperand shows "0"; replace it with the currentOperand value + the newly pressed operator :
+            }*/ if (displayedNum !== "0" && previousOperand.textContent === "0") {
                 previousOperand.textContent = currentOperand.textContent + " " + keyContent;
-                console.log(`previousOperand was "0" and now replaced by "${displayedNum} ${key.textContent}"`)
-                // log the input to newInput :
-                newInput = keyContent
-
-            // if previousOperand is not at its default mode, append the value in currentOperand to it :
-            } else {
-                previousOperand.textContent += " " + currentOperand.textContent + " " + keyContent + " "
+                console.log(`SCENARIO 03: previousOperand was "0" and now replaced by "${displayedNum} ${key.textContent}".`)
 
                 // log the input to previousInput :
-                newInput === keyContent
+                oldInput = newInput;
+                // log the new input to newInput :
+                newInput = keyContent;
+                console.log(`old input is ${oldInput}`);
+                console.log(`new input is ${newInput}`);
+
+            } if (displayedNum == "0" && previousOperand.textContent == "0") {
+
+                // Subtraction is the only action that can be the first thing t show in displayNum (currentOperand) :
+                console.log("SCENARIO 04: user tries to calculate negative numbers, it should be allowed.")
+                currentOperand.textContent == "-"
+                oldInput = newInput;
+                newInput = action;
+
+            } if (displayedNum == "0" && previousOperand.textContent == "0" && action != "subtract") {
+                console.log("SCENARIO 05: This action should skip because user has entered an invalid option.")
+                // Do nothing and pass it :
+                return;              
+
+            // if the last value in previousOperand is an operator, update it to the newly pressed operator :
+            
+
+            // if previousOperand is not at its default mode, append the value in currentOperand to it :
+            } if (action == "subtract") {
+                // code here :
+
+            } else {
+                console.log("SCENARIO 06: values in currentOperand is transferred to previousOperand, so currentOperand is default to 0 now.")
+
+                currentOperand.textContent = "0";
+
+
             }
 
             // change currentOperand to default mode "0" :
-            currentOperand.textContent = "0";
+            //currentOperand.textContent = "0";
 
         // if the button pressed is decimal button :
         } if (action === "decimal") {
 
             // if displayNum contains a decimal point :
             if (displayedNum.includes(".")) {
-
-            // ignore the second decimal point and return it :
-            return;
+                // ignore the second decimal point and return it :
+                return;
 
             // otherwise, append it to displayNum :
             } else {
                 currentOperand.textContent = displayedNum + keyContent
                 console.log("decimal point")
+
+                // log the old input to previousInput :
+                oldInput = newInput;
+                // log the new input to newInput :
+                newInput = keyContent;
+                console.log(`old input is ${oldInput}`);
+                console.log(`new input is ${newInput}`);
             }
 
         // if the button pressed is "AC" :
