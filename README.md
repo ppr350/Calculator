@@ -31,6 +31,6 @@
 - To take the num2, an event listener is needed to listen to either an equal button, or an operator button (the calculator should be able to chain several sets of value and operators, and calculate them one at a time)
 
 #### For taking previous value :
-- 2 variable are created in order to record the last 2 actions.
+- Two variable are created in order to record the last 2 actions.
 - newInput is the button that user has just entered, and the string inside newInput will be moved to oldInput is when the user enters a new button in order to store the latest input
 - If the oldInput value is an operator (addition, deduction, multiplication or division), and newInput is also an operator. It should trigger a code to : 1. Update the operator in previousOperand to the newest one 2. Update the value inside the operator variable to the newest value

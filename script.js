@@ -130,7 +130,7 @@ keys.addEventListener("click", e => {
             } else {
                 console.log("SCENARIO 06: values in currentOperand is transferred to previousOperand, so currentOperand is default to 0 now.")
 
-                //currentOperand.textContent = "0";
+                currentOperand.textContent = "0";
 
 
             }
@@ -178,6 +178,9 @@ keys.addEventListener("click", e => {
 
         // if the button pressed is "="(calculate) :
         } if (action === "calculate") {
+
+            // move the previous input number(s) to previousOperand to make place for the answer :
+            
 
             // it calculates the given value by taking 2 values (which should be in seperate variable) and an operator :
             console.log("SCENARIO 07: the calculator should carry our calculation if values are provided sufficiently.")
