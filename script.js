@@ -75,14 +75,22 @@ keys.addEventListener("click", e => {
             action == "multiply" ||
             action == "divide"
         ) { 
-            /*oldInput = newInput;
-            newInput = action;
-            // log the previous input to oldInput :
-            console.log(`old input is ${oldInput}`);
-            console.log(`new input is ${newInput}`);*/
-
-            // if the value in currentOperand is "0", do nothing :
-            /*if (action === newInput) {
+            if (displayedNum == "0" && previousOperand.textContent == "0") {
+                if (action == "subtract") {
+                    // Subtraction is the only action that can be the first thing t show in displayNum (currentOperand) :
+                    console.log("SCENARIO 04: user tries to calculate negative numbers, it should be allowed.")
+                    currentOperand.textContent = keyContent;
+                    //oldInput = newInput;
+                    newInput = keyContent;
+                    console.log(`old input is ${oldInput}`);
+                    console.log(`new input is ${newInput}`);
+                    } else {
+                        // if the value in currentOperand is "0", do nothing :
+                        // Do nothing and pass it :
+                        console.log("SCENARIO 05: This action should skip because user has entered an invalid option.")
+                        return;     
+                    }
+            } if (action === newInput) {
                 console.log("detected 2 actions successfully")
                 newInput === action;
                 const lastChar = previousOperand.textContent.slice(-2)
@@ -94,41 +102,16 @@ keys.addEventListener("click", e => {
                 // newInput = keyContent
                     
                 // if previousOperand shows "0"; replace it with the currentOperand value + the newly pressed operator :
-            }*/if (displayedNum == "0" && previousOperand.textContent == "0" && action == "subtract") {
-
-                // Subtraction is the only action that can be the first thing t show in displayNum (currentOperand) :
-                console.log("SCENARIO 04: user tries to calculate negative numbers, it should be allowed.")
-                currentOperand.textContent == "this message should appear when user hit '-' button"
-                //oldInput = newInput;
-                newInput = keyContent;
-                console.log(`old input is ${oldInput}`);
-                console.log(`new input is ${newInput}`);
-
-            } if (displayedNum == "0" && previousOperand.textContent == "0" && action != "subtract") {
-                console.log("SCENARIO 05: This action should skip because user has entered an invalid option.")
-                // Do nothing and pass it :
-                return;              
-
-            // if the last value in previousOperand is an operator, update it to the newly pressed operator :
-            
-
-            // if previousOperand is not at its default mode, append the value in currentOperand to it :
-            } if (displayedNum !== "0" && previousOperand.textContent === "0") {
+            } else {
+                console.log("SCENARIO 06: values in currentOperand is transferred to previousOperand, so currentOperand is default to 0 now.");
                 previousOperand.textContent = currentOperand.textContent + " " + keyContent;
-                console.log(`SCENARIO 03: previousOperand was "0" and now replaced by "${displayedNum} ${key.textContent}".`)
-
+                console.log(`SCENARIO 03: previousOperand was "0" and now replaced by "${displayedNum} ${key.textContent}".`);
                 // log the input to previousInput :
                 oldInput = newInput;
                 // log the new input to newInput :
                 newInput = keyContent;
                 console.log(`old input is ${oldInput}`);
                 console.log(`new input is ${newInput}`);
-
-            } if (action == "subtract") {
-                // code here :
-
-            } else {
-                console.log("SCENARIO 06: values in currentOperand is transferred to previousOperand, so currentOperand is default to 0 now.")
 
                 currentOperand.textContent = "0";
 
