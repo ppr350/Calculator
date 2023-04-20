@@ -102,6 +102,8 @@ keys.addEventListener("click", e => {
                     // use Regex to replce the last character (the operator symbol) to the newest one :
                     const updatePreviousOperand = previousOperand.textContent.replace(/.$/,`${keyContent}`)
 
+                    operator = keyContent;
+
                     // copy the content in the new string to previousOperand :
                     previousOperand.textContent = updatePreviousOperand;
                     
@@ -110,6 +112,10 @@ keys.addEventListener("click", e => {
                     console.log(`new input is ${newInput}`)
 
                 } if (displayedNum != "0") {
+
+                    num2 = parseFloat(displayedNum)
+                    console.log(`num2 is ${num2}`)
+
                     console.log("SCENARIO 08: The calculator should calculate the input now.")
 
                     // it should calculate the first set of input :
@@ -122,12 +128,21 @@ keys.addEventListener("click", e => {
                     console.log(`old input is ${oldInput}`);
                     console.log(`new input is ${newInput}`);
 
-                    currentOperand.textContent = "answer";
+                    // call the calculte function :
+                    calculate(num1, num2, operator)
                 }
                     
             // if previousOperand shows "0"; replace it with the currentOperand value + the newly pressed operator :
             } else {
+
+                num1 = parseFloat(displayedNum);
+                console.log(`num1 is ${num1}`);
+
+                operator = keyContent;
+                console.log(`operator is ${operator}`);
+
                 console.log("SCENARIO 06: values in currentOperand is transferred to previousOperand, so currentOperand is default to 0 now.");
+
                 previousOperand.textContent = currentOperand.textContent + " " + keyContent;
                 console.log(`SCENARIO 03: previousOperand was "0" and now replaced by "${displayedNum} ${key.textContent}".`);
                 // log the input to previousInput :
@@ -178,18 +193,30 @@ keys.addEventListener("click", e => {
         // if the button pressed is "CE" :
         } if (action === "clear_entry") {
 
-            // it delete the last entry on currentOperand :
-            console.log("clear entry")
+            if (currentOperand.textContent.length == 1) {
+                console.log("SCENARIO 09: return currentOperand to 0.")
+                currentOperand.textContent = "0";
+            } else if (currentOperand.textContent.length > 1 ) {
+
+                // it delete the last entry on currentOperand :
+                console.log("SCENARIO 10: clear last entry.")
+                let deleteLastChar = currentOperand.textContent.slice(0, -1);
+                currentOperand.textContent = deleteLastChar;
+            }
 
         // if the button pressed is "="(calculate) :
         } if (action === "calculate") {
 
-            // move the previous input number(s) to previousOperand to make place for the answer :
-            
-
             // it calculates the given value by taking 2 values (which should be in seperate variable) and an operator :
             console.log("SCENARIO 07: the calculator should carry our calculation if values are provided sufficiently.")
+            num2 = parseFloat(displayedNum)
 
+            // move the previous input number(s) to previousOperand to make place for the answer :
+            previousOperand.textContent = previousOperand.textContent + " " + displayedNum;
+
+            console.log(`num2 is ${num2}`)
+            // call the calculte function :
+            calculate(num1, num2, operator)
             // if the input has more than one operations, the calculator should evaluate each set of number at a time ** :
             // i.e : 12 + 7 - 5 * 3 = 42
         }
@@ -200,3 +227,26 @@ keys.addEventListener("click", e => {
 function previousInput() {
 
 }
+
+
+function calculate() {
+    let result = ""
+    if (operator === "÷") {
+        result = num1 / num2
+    } else if (operator === "x") {
+        result = num1 * num2
+    } else if (operator === "-") {
+        result = num1 - num2
+    } else if (operator === "+") {
+        result = num1 + num2
+    }
+    console.log(result)
+    currentOperand.textContent = result;
+}
+
+
+
+
+
+
+
