@@ -80,28 +80,52 @@ keys.addEventListener("click", e => {
                     // Subtraction is the only action that can be the first thing t show in displayNum (currentOperand) :
                     console.log("SCENARIO 04: user tries to calculate negative numbers, it should be allowed.")
                     currentOperand.textContent = keyContent;
+
                     //oldInput = newInput;
                     newInput = keyContent;
                     console.log(`old input is ${oldInput}`);
                     console.log(`new input is ${newInput}`);
+
+                    // added a return here to prevent the code to continue :
+                    return;
+
                     } else {
                         // if the value in currentOperand is "0", do nothing :
                         // Do nothing and pass it :
                         console.log("SCENARIO 05: This action should skip because user has entered an invalid option.")
                         return;     
                     }
-            } if (action === newInput) {
-                console.log("detected 2 actions successfully")
-                newInput === action;
-                const lastChar = previousOperand.textContent.slice(-2)
-                console.log(lastChar)
+            } if (previousOperand.textContent != "0") {
+                if (displayedNum == "0") {
+                    console.log("SCENARIO 07: Detected 2 actions successfully, replaced the operator to the updated one.")
 
-                // Code here to replace the last operator to the newly pressed operator :
+                    // use Regex to replce the last character (the operator symbol) to the newest one :
+                    const updatePreviousOperand = previousOperand.textContent.replace(/.$/,`${keyContent}`)
 
-                // log the input to newInput :
-                // newInput = keyContent
+                    // copy the content in the new string to previousOperand :
+                    previousOperand.textContent = updatePreviousOperand;
                     
-                // if previousOperand shows "0"; replace it with the currentOperand value + the newly pressed operator :
+                    newInput = keyContent;
+                    console.log(`old input is ${oldInput}`)
+                    console.log(`new input is ${newInput}`)
+
+                } if (displayedNum != "0") {
+                    console.log("SCENARIO 08: The calculator should calculate the input now.")
+
+                    // it should calculate the first set of input :
+
+                    previousOperand.textContent = previousOperand.textContent + " " + displayedNum;
+                    // log the input to previousInput :
+                    oldInput = newInput;
+                    // log the new input to newInput :
+                    newInput = keyContent;
+                    console.log(`old input is ${oldInput}`);
+                    console.log(`new input is ${newInput}`);
+
+                    currentOperand.textContent = "answer";
+                }
+                    
+            // if previousOperand shows "0"; replace it with the currentOperand value + the newly pressed operator :
             } else {
                 console.log("SCENARIO 06: values in currentOperand is transferred to previousOperand, so currentOperand is default to 0 now.");
                 previousOperand.textContent = currentOperand.textContent + " " + keyContent;
@@ -114,8 +138,6 @@ keys.addEventListener("click", e => {
                 console.log(`new input is ${newInput}`);
 
                 currentOperand.textContent = "0";
-
-
             }
 
             // change currentOperand to default mode "0" :
