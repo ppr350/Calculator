@@ -206,19 +206,22 @@ keys.addEventListener("click", e => {
 
         // if the button pressed is "="(calculate) :
         } if (action === "calculate") {
+            const regex = /[0-9*÷\+-]/;
+            if (previousOperand.textContent.match(regex) ) {
+                console.log("detected number")
+                // it calculates the given value by taking 2 values (which should be in seperate variable) and an operator :
+                console.log("SCENARIO 07: the calculator should carry our calculation if values are provided sufficiently.")
+                num2 = parseFloat(displayedNum)
 
-            // it calculates the given value by taking 2 values (which should be in seperate variable) and an operator :
-            console.log("SCENARIO 07: the calculator should carry our calculation if values are provided sufficiently.")
-            num2 = parseFloat(displayedNum)
+                // move the previous input number(s) to previousOperand to make place for the answer :
+                previousOperand.textContent = previousOperand.textContent + " " + displayedNum;
 
-            // move the previous input number(s) to previousOperand to make place for the answer :
-            previousOperand.textContent = previousOperand.textContent + " " + displayedNum;
-
-            console.log(`num2 is ${num2}`)
-            // call the calculte function :
-            calculate(num1, num2, operator)
-            // if the input has more than one operations, the calculator should evaluate each set of number at a time ** :
-            // i.e : 12 + 7 - 5 * 3 = 42
+                console.log(`num2 is ${num2}`)
+                // call the calculte function :
+                calculate(num1, num2, operator)
+                // if the input has more than one operations, the calculator should evaluate each set of number at a time ** :
+                // i.e : 12 + 7 - 5 * 3 = 42
+            }
         }
     }
 })
