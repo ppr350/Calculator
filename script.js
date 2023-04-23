@@ -206,8 +206,8 @@ keys.addEventListener("click", e => {
 
         // if the button pressed is "="(calculate) :
         } if (action === "calculate") {
-            const regex = /[0-9*÷\+-]/;
-            if (previousOperand.textContent.match(regex) ) {
+            const regexHasOperator = /[*÷\+-]$/;
+            if (previousOperand.textContent.match(regexHasOperator)) {
                 console.log("detected number")
                 // it calculates the given value by taking 2 values (which should be in seperate variable) and an operator :
                 console.log("SCENARIO 07: the calculator should carry our calculation if values are provided sufficiently.")
