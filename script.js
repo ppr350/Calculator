@@ -75,7 +75,11 @@ keys.addEventListener("click", e => {
             action == "multiply" ||
             action == "divide"
         ) { 
-            if (displayedNum == "0" && previousOperand.textContent == "0") {
+            if (displayedNum == "-") {
+                return;
+                
+            } if (displayedNum == "0" && previousOperand.textContent == "0") {
+                
                 if (action == "subtract") {
                     // Subtraction is the only action that can be the first thing t show in displayNum (currentOperand) :
                     console.log("SCENARIO 04: user tries to calculate negative numbers, it should be allowed.")
@@ -112,24 +116,29 @@ keys.addEventListener("click", e => {
                     console.log(`new input is ${newInput}`)
 
                 } if (displayedNum != "0") {
+                    if (newInput = "=") {
+                        previousOperand.textContent == "answer";
+                        currentOperand.textContent == "0";
+                        console.log("move answer previousOperand")
+                    } else {
+                        num2 = parseFloat(displayedNum)
+                        console.log(`num2 is ${num2}`)
 
-                    num2 = parseFloat(displayedNum)
-                    console.log(`num2 is ${num2}`)
+                        console.log("SCENARIO 08: The calculator should calculate the input now.")
 
-                    console.log("SCENARIO 08: The calculator should calculate the input now.")
+                        // it should calculate the first set of input :
 
-                    // it should calculate the first set of input :
+                        previousOperand.textContent = previousOperand.textContent + " " + displayedNum;
+                        // log the input to previousInput :
+                        oldInput = newInput;
+                        // log the new input to newInput :
+                        newInput = keyContent;
+                        console.log(`old input is ${oldInput}`);
+                        console.log(`new input is ${newInput}`);
 
-                    previousOperand.textContent = previousOperand.textContent + " " + displayedNum;
-                    // log the input to previousInput :
-                    oldInput = newInput;
-                    // log the new input to newInput :
-                    newInput = keyContent;
-                    console.log(`old input is ${oldInput}`);
-                    console.log(`new input is ${newInput}`);
-
-                    // call the calculte function :
-                    calculate(num1, num2, operator)
+                        // call the calculte function :
+                        calculate(num1, num2, operator)
+                    }
                 }
                     
             // if previousOperand shows "0"; replace it with the currentOperand value + the newly pressed operator :
@@ -207,7 +216,7 @@ keys.addEventListener("click", e => {
         // if the button pressed is "="(calculate) :
         } if (action === "calculate") {
             const regexHasOperator = /[*÷\+-]$/;
-            if (previousOperand.textContent.match(regexHasOperator)) {
+            if (previousOperand.textContent.match(regexHasOperator) && (currentOperand.textContent != 0)) {
                 console.log("detected number")
                 // it calculates the given value by taking 2 values (which should be in seperate variable) and an operator :
                 console.log("SCENARIO 07: the calculator should carry our calculation if values are provided sufficiently.")
@@ -219,8 +228,17 @@ keys.addEventListener("click", e => {
                 console.log(`num2 is ${num2}`)
                 // call the calculte function :
                 calculate(num1, num2, operator)
+
+                oldInput = newInput;
+                // log the new input to newInput :
+                newInput = keyContent;
+                console.log(`old input is ${oldInput}`);
+                console.log(`new input is ${newInput}`);
                 // if the input has more than one operations, the calculator should evaluate each set of number at a time ** :
                 // i.e : 12 + 7 - 5 * 3 = 42
+            } else if (newInput = "=") {
+                console.log("Do nothing")
+                return;
             }
         }
     }
