@@ -76,6 +76,7 @@ keys.addEventListener("click", e => {
             action == "divide"
         ) { 
             if (displayedNum == "-") {
+                console.log("SCENARIO 05: This action should skip because user has entered an invalid option.")
                 return;
                 
             } if (displayedNum == "0" && previousOperand.textContent == "0") {
@@ -116,9 +117,10 @@ keys.addEventListener("click", e => {
                     console.log(`new input is ${newInput}`)
 
                 } if (displayedNum != "0") {
-                    if (newInput = "=") {
-                        previousOperand.textContent == "answer";
-                        currentOperand.textContent == "0";
+                    const regexHasOperatorAndNum = /*   number(s) + /[x÷\+-]$/ + number(s)  */;
+                    if (newInput == "=" || newInput == regexHasOperatorAndNum) {
+                        previousOperand.textContent = result;
+                        currentOperand == "0";
                         console.log("move answer previousOperand")
                     } else {
                         num2 = parseFloat(displayedNum)
@@ -215,7 +217,7 @@ keys.addEventListener("click", e => {
 
         // if the button pressed is "="(calculate) :
         } if (action === "calculate") {
-            const regexHasOperator = /[*÷\+-]$/;
+            const regexHasOperator = /[x÷\+-]$/;
             if (previousOperand.textContent.match(regexHasOperator) && (currentOperand.textContent != 0)) {
                 console.log("detected number")
                 // it calculates the given value by taking 2 values (which should be in seperate variable) and an operator :
