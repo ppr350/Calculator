@@ -117,8 +117,9 @@ keys.addEventListener("click", e => {
                         return;     
                     }
             } if (previousOperand.textContent != "0") {
+                const regexNewInputIsOperator = /[x÷\+-]/;
                 const regexOperatorLast = /[x÷\+-]$/;
-                if (displayedNum == "0" && previousOperand.textContent.match(regexOperatorLast)) {
+                if (displayedNum == "0" && previousOperand.textContent.match(regexOperatorLast) && newInput.match(regexNewInputIsOperator)) {
                     console.log("SCENARIO 07: Detected 2 actions successfully, replaced the operator to the updated one.")
 
                     // use Regex to replce the last character (the operator symbol) to the newest one :
