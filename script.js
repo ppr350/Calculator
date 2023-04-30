@@ -135,12 +135,10 @@ keys.addEventListener("click", e => {
                     console.log(`new input is ${newInput}`)
 
                 } 
-                const regexHasOperatorAndNum = /^[0-9]+[x÷\+-][0-9]+$/;
-                if (displayedNum != "0" && previousOperand.textContent.match(regexHasOperatorAndNum)) {
-                    console.log("reached here")
-                    const regexHasOperator = /[x÷\+-]$/;
+                const regexHasOperatorAndNum = /^[0-9]+[x÷\+-]$/;
+                if (displayedNum != "0" && previousOperand.textContent.match(regexOperatorLast)) {
 
-                    if (newInput == "=" || newInput == regexHasOperator ) {
+                    if (newInput == "=" || newInput == regexOperatorLast ) {
                         console.log("SCENARIO 10: Second round of calculation.")
                         previousOperand.textContent = displayedNum + " " + keyContent;
                         currentOperand.textContent = "0"
@@ -176,6 +174,9 @@ keys.addEventListener("click", e => {
 
                         console.log(`old input is ${oldInput}`);
                         console.log(`new input is ${newInput}`);
+
+                        num1 = displayedNum;
+
                     }
                 }
                     
@@ -301,6 +302,10 @@ function calculate() {
     }
     console.log(result)
     currentOperand.textContent = result;
+    num1 = result;
+    num2 = null
+    console.log(`num1 is ${num1}`);
+    console.log(`num2 is ${num2}`);
 }
 
 
