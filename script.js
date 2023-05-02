@@ -117,8 +117,12 @@ keys.addEventListener("click", e => {
                         return;     
                     }
             } if (previousOperand.textContent != "0") {
+
+                // Regex :
                 const regexNewInputIsOperator = /[x÷\+-]/;
                 const regexOperatorLast = /[x÷\+-]$/;
+                const regexHasOperatorAndNum = /^[0-9]+[x÷\+-][0-9]+$/;
+
                 if (displayedNum == "0" && previousOperand.textContent.match(regexOperatorLast) && newInput.match(regexNewInputIsOperator)) {
                     console.log("SCENARIO 07: Detected 2 actions successfully, replaced the operator to the updated one.")
 
@@ -135,48 +139,51 @@ keys.addEventListener("click", e => {
                     console.log(`new input is ${newInput}`)
 
                 } 
-                const regexHasOperatorAndNum = /^[0-9]+[x÷\+-]$/;
-                if (displayedNum != "0" && previousOperand.textContent.match(regexOperatorLast)) {
 
-                    if (newInput == "=" || newInput == regexOperatorLast ) {
-                        console.log("SCENARIO 10: Second round of calculation.")
-                        previousOperand.textContent = displayedNum + " " + keyContent;
-                        currentOperand.textContent = "0"
-                        
-                        const regexNum1 = /[0-9]+/;
-                        const regexNum2 = /[0-9]+/;
-                        num1 == displayedNum.match(regexNum1)
-                        num2 == regexNum2
-                        console.log(`num1 is ${num1}.`);
-                        console.log(`num2 is ${num2}.`);
+                if (displayedNum != "0") {
+                    if (previousOperand.textContent.match(regexHasOperatorAndNum)) {
+                        console.log("Reaching second round calculation stage.")
 
-                        calculate(num1, num2, operator)
-                        previousOperand.textContent = result;
-                        currentOperand == "0";
-                        console.log("move answer previousOperand")
-                    } else {
-                        console.log("detected number")
-                        console.log("SCENARIO 08: The calculator should calculate the input now.")
+                        if (newInput = "=" /*|| oldInput == regexOperatorLast*/ ) {
+                            console.log("SCENARIO 10: Second round of calculation.")
+                            previousOperand.textContent = displayedNum + " " + keyContent;
+                            currentOperand.textContent = "0"
+                            
+                            const regexNum1 = /[0-9]+/;
+                            const regexNum2 = /[0-9]+/;
+                            num1 == displayedNum.match(regexNum1)
+                            num2 == regexNum2
+                            console.log(`num1 is ${num1}.`);
+                            console.log(`num2 is ${num2}.`);
 
-                        num2 = parseFloat(displayedNum)
-                        console.log(`num2 is ${num2}`)
+                            calculate(num1, num2, operator)
+                            previousOperand.textContent = result;
+                            currentOperand == "0";
+                            console.log("move answer previousOperand")
+                        } else {
+                            console.log("detected number")
+                            console.log("SCENARIO 08: The calculator should calculate the input now.")
 
-                        // it should calculate the first set of input :
+                            num2 = parseFloat(displayedNum)
+                            console.log(`num2 is ${num2}`)
 
-                        previousOperand.textContent = previousOperand.textContent + " " + displayedNum;
-                        // log the input to previousInput :
-                        oldInput = newInput;
-                        // log the new input to newInput :
-                        newInput = keyContent;
+                            // it should calculate the first set of input :
 
-                        // call the calculte function :
-                        calculate(num1, num2, operator)
+                            previousOperand.textContent = previousOperand.textContent + " " + displayedNum;
+                            // log the input to previousInput :
+                            oldInput = newInput;
+                            // log the new input to newInput :
+                            newInput = keyContent;
 
-                        console.log(`old input is ${oldInput}`);
-                        console.log(`new input is ${newInput}`);
+                            // call the calculte function :
+                            calculate(num1, num2, operator)
 
-                        num1 = displayedNum;
+                            console.log(`old input is ${oldInput}`);
+                            console.log(`new input is ${newInput}`);
 
+                            num1 = displayedNum;
+
+                        }
                     }
                 }
                     
@@ -300,7 +307,7 @@ function calculate() {
     } else if (operator === "+") {
         result = num1 + num2
     }
-    console.log(result)
+    console.log(`The answer is ${result}.`)
     currentOperand.textContent = result;
     num1 = result;
     num2 = null
