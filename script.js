@@ -43,45 +43,74 @@ keys.addEventListener("click", e => {
         // if the button pressed is number button :
         if (!action) {
 
+            const regexNewInputIsOperator = /[x÷\+-]/;
+            const regexOperatorLast = /[x÷\+-]$/;
+            const regexHasOperator = /[x÷\+-]/;
+
             // update the current_operand display to the number pressed if the display shows "0" (default) :
             if (displayedNum === "0") {
+                if (previousOperand.textContent === "0") {
 
-                currentOperand.textContent = keyContent;
+                    currentOperand.textContent = keyContent;
 
-                // log the input to previousInput :
-                oldInput = newInput;
-                newInput = keyContent;
-                console.log(`SCENARIO 01: currentOperand (displayNum) was "0" before "${keyContent}" was entered.`)
+                    // log the input to previousInput :
+                    oldInput = newInput;
+                    newInput = keyContent;
+                    console.log(`SCENARIO 01: currentOperand (displayNum) was "0" before "${keyContent}" was entered.`)
 
-                console.log(`old input is ${oldInput}`)
-                console.log(`new input is ${newInput}`)
+                    console.log(`old input is ${oldInput}`)
+                    console.log(`new input is ${newInput}`)
+                    
+                } if (previousOperand.textContent.match(regexOperatorLast)) {
+                    currentOperand.textContent = keyContent;
+
+                    oldInput = newInput;
+                    newInput = keyContent;
+                    console.log(`old input is ${oldInput}`)
+                    console.log(`new input is ${newInput}`)
+                }
+
+
+            }
 
             // append the newly pressed number at the end of the current_operand :
-            } 
-            const regexNewInputIsOperator = /[x÷\+-]/;
-            if (displayedNum != "0" && newInput.match(regexNewInputIsOperator)) {
-                const regexHasOperatorAndNum = /^[0-9]+[x÷\+-][0-9]+$/;
-                previousOperand.textContent = displayedNum + " " + newInput;
-                currentOperand.textContent = keyContent;
+            if (displayedNum != "0") {
+                if (newInput.match(regexNewInputIsOperator)) {
+                    const regexHasOperatorAndNum = /^[0-9]+[x÷\+-][0-9]+$/;
+                    previousOperand.textContent = displayedNum + " " + newInput;
+                    currentOperand.textContent = keyContent;
 
-                // log the input to previousInput :
-                oldInput = newInput;
-                // log the new input to newInput :
-                newInput = keyContent;
-                console.log(`old input is ${oldInput}`)
-                console.log(`new input is ${newInput}`)
+                    // log the input to previousInput :
+                    oldInput = newInput;
+                    // log the new input to newInput :
+                    newInput = keyContent;
+                    console.log(`old input is ${oldInput}`)
+                    console.log(`new input is ${newInput}`)
 
-                console.log("previousOperand has numbers and an operator.")
-            } if (displayedNum != "0" && previousOperand.textContent == "0") {
-                console.log(`SCENARIO 02: currentOperand has value "${displayedNum}" and now will have "${keyContent}" append to it.`)
-                currentOperand.textContent = displayedNum + keyContent
+                    console.log("previousOperand has numbers and an operator.")
 
-                // log the input to previousInput :
-                oldInput = newInput;
-                // log the new input to newInput :
-                newInput = keyContent;
-                console.log(`old input is ${oldInput}`);
-                console.log(`new input is ${newInput}`);
+                } if (previousOperand.textContent == "0") {
+                    console.log(`SCENARIO 02: currentOperand has value "${displayedNum}" and now will have "${keyContent}" append to it.`)
+                    currentOperand.textContent = displayedNum + keyContent
+
+                    // log the input to previousInput :
+                    oldInput = newInput;
+                    // log the new input to newInput :
+                    newInput = keyContent;
+                    console.log(`old input is ${oldInput}`);
+                    console.log(`new input is ${newInput}`);
+
+                } if (displayedNum != "0" && previousOperand.textContent.match(regexOperatorLast)) {
+                    currentOperand.textContent = displayedNum + keyContent;
+
+                    // log the input to previousInput :
+                    oldInput = newInput;
+                    // log the new input to newInput :
+                    newInput = keyContent;
+                    console.log(`old input is ${oldInput}`);
+                    console.log(`new input is ${newInput}`);
+                    console.log("SCENARIO 11: currendOperand has a value and user is adding more onto it.")
+                }
             }
 
         // if the button pressed is operator button :
