@@ -146,11 +146,11 @@ keys.addEventListener("click", e => {
                         return;     
                     }
             } if (previousOperand.textContent != "0") {
+                console.log("previousOperand is not 0.")
 
                 // Regex :
                 const regexNewInputIsOperator = /[x÷\+-]/;
                 const regexOperatorLast = /[x÷\+-]$/;
-                const regexHasOperatorAndNum = /^[0-9]+[x÷\+-][0-9]+$/;
 
                 if (displayedNum == "0" && previousOperand.textContent.match(regexOperatorLast) && newInput.match(regexNewInputIsOperator)) {
                     console.log("SCENARIO 07: Detected 2 actions successfully, replaced the operator to the updated one.")
@@ -159,6 +159,7 @@ keys.addEventListener("click", e => {
                     const updatePreviousOperand = previousOperand.textContent.replace(/.$/,`${keyContent}`)
 
                     operator = keyContent;
+                    console.log(`operator is ${operator}`);
 
                     // copy the content in the new string to previousOperand :
                     previousOperand.textContent = updatePreviousOperand;
@@ -167,38 +168,46 @@ keys.addEventListener("click", e => {
                     console.log(`old input is ${oldInput}`)
                     console.log(`new input is ${newInput}`)
 
-                } 
+                } if (displayedNum != "0") {
+                    console.log("currentOperand is not 0.")
+                    const regexHasOperatorAndNum = /^[0-9]+/;
 
-                if (displayedNum != "0") {
                     if (previousOperand.textContent.match(regexHasOperatorAndNum)) {
                         console.log("Reaching second round calculation stage.")
 
-                        if (newInput = "=" /*|| oldInput == regexOperatorLast*/ ) {
+                        if (newInput.match(/[0-9]/) /*|| oldInput == regexOperatorLast*/ ) {
                             console.log("SCENARIO 10: Second round of calculation.")
-                            previousOperand.textContent = displayedNum + " " + keyContent;
-                            currentOperand.textContent = "0"
+                            previousOperand.textContent = displayedNum + " " + operator;
                             
-                            const regexNum1 = /[0-9]+/;
+                            const regexNum1 = /^[0-9]+/;
                             const regexNum2 = /[0-9]+/;
-                            num1 == displayedNum.match(regexNum1)
-                            num2 == regexNum2
+                            //num1 == previousOperand.textContent.match(regexNum1);
+                            num2 = parseFloat(displayedNum);
+                            currentOperand.textContent = "0"
+
+                            //operator = operator;
+                            console.log(`Operator is ${operator}.`)
+
                             console.log(`num1 is ${num1}.`);
                             console.log(`num2 is ${num2}.`);
 
+
+                            previousOperand.textContent = num1 + " " + operator + " " + num2;
                             calculate(num1, num2, operator)
-                            previousOperand.textContent = result;
-                            currentOperand == "0";
-                            console.log("move answer previousOperand")
+
+
+
+
                         } else {
                             console.log("detected number")
                             console.log("SCENARIO 08: The calculator should calculate the input now.")
 
-                            num2 = parseFloat(displayedNum)
+                            //num2 = parseFloat(displayedNum)
                             console.log(`num2 is ${num2}`)
 
                             // it should calculate the first set of input :
 
-                            previousOperand.textContent = previousOperand.textContent + " " + displayedNum;
+                            //previousOperand.textContent = previousOperand.textContent + " " + displayedNum;
                             // log the input to previousInput :
                             oldInput = newInput;
                             // log the new input to newInput :
@@ -298,11 +307,11 @@ keys.addEventListener("click", e => {
                 num2 = parseFloat(displayedNum)
 
                 // move the previous input number(s) to previousOperand to make place for the answer :
-                previousOperand.textContent = previousOperand.textContent + " " + displayedNum;
+                previousOperand.textContent = num1 + " " + operator + " " + num2;
 
                 console.log(`num2 is ${num2}`)
                 // call the calculte function :
-                calculate(num1, num2, operator)
+                calculate(parseFloat(num1), parseFloat(num2), operator)
 
                 oldInput = newInput;
                 // log the new input to newInput :
@@ -339,7 +348,7 @@ function calculate() {
     console.log(`The answer is ${result}.`)
     currentOperand.textContent = result;
     num1 = result;
-    num2 = null
+    num2 = undefined;
     console.log(`num1 is ${num1}`);
     console.log(`num2 is ${num2}`);
 }
