@@ -76,18 +76,23 @@ keys.addEventListener("click", e => {
             // append the newly pressed number at the end of the current_operand :
             if (displayedNum != "0") {
                 if (newInput.match(regexNewInputIsOperator)) {
-                    const regexHasOperatorAndNum = /^[0-9]+[x÷\+-][0-9]+$/;
-                    previousOperand.textContent = displayedNum + " " + newInput;
-                    currentOperand.textContent = keyContent;
 
-                    // log the input to previousInput :
-                    oldInput = newInput;
-                    // log the new input to newInput :
-                    newInput = keyContent;
-                    console.log(`old input is ${oldInput}`)
-                    console.log(`new input is ${newInput}`)
+                    if (f) {
+                        const regexHasOperatorAndNum = /^[0-9]+[x÷\+-][0-9]+$/;
+                        previousOperand.textContent = displayedNum + " " + newInput;
+                        currentOperand.textContent = keyContent;
 
-                    console.log("previousOperand has numbers and an operator.")
+                        // log the input to previousInput :
+                        oldInput = newInput;
+                        // log the new input to newInput :
+                        newInput = keyContent;
+                        console.log(`old input is ${oldInput}`)
+                        console.log(`new input is ${newInput}`)
+
+                        console.log("previousOperand has numbers and an operator.")
+                    } if (f) {
+                        // code here
+                    }
 
                 } if (previousOperand.textContent == "0") {
                     console.log(`SCENARIO 02: currentOperand has value "${displayedNum}" and now will have "${keyContent}" append to it.`)
@@ -170,7 +175,7 @@ keys.addEventListener("click", e => {
 
                 } if (displayedNum != "0") {
                     console.log("currentOperand is not 0.")
-                    const regexHasOperatorAndNum = /^[0-9]+/;
+                    const regexHasOperatorAndNum = /[x÷\+-]/;
 
                     if (previousOperand.textContent.match(regexHasOperatorAndNum)) {
                         console.log("Reaching second round calculation stage.")
@@ -195,7 +200,8 @@ keys.addEventListener("click", e => {
                             previousOperand.textContent = num1 + " " + operator + " " + num2;
                             calculate(num1, num2, operator)
 
-
+                            operator = keyContent;
+                            console.log(`Operator is ${operator}.`)
 
 
                         } else {
