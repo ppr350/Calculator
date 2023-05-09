@@ -77,11 +77,11 @@ keys.addEventListener("click", e => {
             if (displayedNum != "0") {
                 if (newInput.match(regexNewInputIsOperator)) {
 
-                    const regexHasNumAtTheFront = /^[0-9]/;
+                    const regexHasNumAtTheBack = /[0-9]$/;
                     const regexHasOperator = /[x÷\+-]/
                     const regexHasOperatorAtTheEnd = /[x÷\+-]$/
 
-                    if (previousOperand.textContent.match(regexHasNumAtTheFront)
+                    if (previousOperand.textContent.match(regexHasNumAtTheBack)
                         && previousOperand.textContent.match(regexHasOperator)) {
 
                         // newInput is still an operator at the moment
@@ -102,12 +102,10 @@ keys.addEventListener("click", e => {
 
 
                         console.log("previousOperand has numbers and an operator.")
-                    } if (previousOperand.textContent.match(regexHasNumAtTheFront)
-                        && previousOperand.textContent.match(regexHasOperatorAtTheEnd)) {
-                        // code here
+                        return;
                     }
 
-                } if (previousOperand.textContent == "0") {
+                } else if (previousOperand.textContent == "0") {
                     console.log(`SCENARIO 02: currentOperand has value "${displayedNum}" and now will have "${keyContent}" append to it.`)
                     currentOperand.textContent = displayedNum + keyContent
 
@@ -118,7 +116,8 @@ keys.addEventListener("click", e => {
                     console.log(`old input is ${oldInput}`);
                     console.log(`new input is ${newInput}`);
 
-                } if (displayedNum != "0" && previousOperand.textContent.match(regexOperatorLast)) {
+                } else if (displayedNum != "0" && previousOperand.textContent.match(regexOperatorLast)
+                    && newInput != regexHasOperator) {
                     currentOperand.textContent = displayedNum + keyContent;
 
                     // log the input to previousInput :
@@ -344,9 +343,12 @@ keys.addEventListener("click", e => {
                 console.log(`new input is ${newInput}`);
                 // if the input has more than one operations, the calculator should evaluate each set of number at a time ** :
                 // i.e : 12 + 7 - 5 * 3 = 42
+                return;
             } else if (newInput = "=") {
                 console.log("Do nothing")
                 return;
+            } else if (num1 === result) {
+                console.log("should calcualte this")
             }
         }
     }
@@ -357,9 +359,10 @@ function previousInput() {
 
 }
 
+let result = ""
 
 function calculate() {
-    let result = ""
+    //let result = ""
     if (operator === "÷") {
         result = num1 / num2
     } else if (operator === "x") {
