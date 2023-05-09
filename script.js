@@ -348,7 +348,7 @@ keys.addEventListener("click", e => {
                 console.log("Do nothing")
                 return;
             } else if (num1 === result) {
-                console.log("should calcualte this")
+                console.log("should calculate this")
             }
         }
     }
