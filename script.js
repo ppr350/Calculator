@@ -37,8 +37,6 @@ keys.addEventListener("click", e => {
         // make a variable called "displayNum" and chain it with the global scope "currendOperand" to access the value in it :
         const displayedNum = currentOperand.textContent
 
-        // make a variable called "upperDisplayNum" and chain it with the global scope "previousOperand" to access the value in it :
-        const upperDisplayNum = previousOperand.textContent
 
         // if the button pressed is number button :
         if (!action) {
@@ -60,6 +58,7 @@ keys.addEventListener("click", e => {
 
                     console.log(`old input is ${oldInput}`)
                     console.log(`new input is ${newInput}`)
+                    return;
                     
                 } if (previousOperand.textContent.match(regexOperatorLast)) {
                     currentOperand.textContent = keyContent;
@@ -68,6 +67,15 @@ keys.addEventListener("click", e => {
                     newInput = keyContent;
                     console.log(`old input is ${oldInput}`)
                     console.log(`new input is ${newInput}`)
+                    return;
+
+                } if (result == "0" && previousOperand.textContent.match(regexHasOperator)) {
+                    console.log("it should carry on")
+                    if (newInput.match(regexHasOperator)) {
+                        previousOperand.textContent = currentOperand.textContent + " " + newInput;
+                        currentOperand.textContent = keyContent;
+
+                    }
                 }
 
 
@@ -141,7 +149,7 @@ keys.addEventListener("click", e => {
                 console.log("SCENARIO 05: This action should skip because user has entered an invalid option.")
                 return;
                 
-            } if (displayedNum == "0" && previousOperand.textContent == "0") {
+            } else if (displayedNum == "0" && previousOperand.textContent == "0") {
                 
                 if (action == "subtract") {
                     // Subtraction is the only action that can be the first thing t show in displayNum (currentOperand) :
@@ -162,30 +170,39 @@ keys.addEventListener("click", e => {
                         console.log("SCENARIO 05: This action should skip because user has entered an invalid option.")
                         return;     
                     }
-            } if (previousOperand.textContent != "0") {
+            } else if (previousOperand.textContent != "0") {
                 console.log("previousOperand is not 0.")
 
                 // Regex :
                 const regexNewInputIsOperator = /[x÷\+-]/;
                 const regexOperatorLast = /[x÷\+-]$/;
-
-                if (displayedNum == "0" && previousOperand.textContent.match(regexOperatorLast) && newInput.match(regexNewInputIsOperator)) {
-                    console.log("SCENARIO 07: Detected 2 actions successfully, replaced the operator to the updated one.")
-
-                    // use Regex to replce the last character (the operator symbol) to the newest one :
-                    const updatePreviousOperand = previousOperand.textContent.replace(/.$/,`${keyContent}`)
-
-                    operator = keyContent;
-                    console.log(`operator is ${operator}`);
-
-                    // copy the content in the new string to previousOperand :
-                    previousOperand.textContent = updatePreviousOperand;
-                    
+                if (previousOperand.textContent.match(regexNewInputIsOperator) && newInput == "=" && currentOperand.textContent == result) {
                     newInput = keyContent;
-                    console.log(`old input is ${oldInput}`)
-                    console.log(`new input is ${newInput}`)
+                    previousOperand.textContent = currentOperand.textContent + " " + keyContent;
+                    currentOperand.textContent = "0";
+                    operator = keyContent;
+                
+                } else if (displayedNum == "0" && previousOperand.textContent.match(regexOperatorLast)) {
 
-                } if (displayedNum != "0") {
+                    if (newInput.match(regexNewInputIsOperator) || newInput == "=") {
+                        console.log("SCENARIO 07: Detected 2 actions successfully, replaced the operator to the updated one.")
+
+                        // use Regex to replce the last character (the operator symbol) to the newest one :
+                        const updatePreviousOperand = previousOperand.textContent.replace(/.$/,`${keyContent}`)
+
+                        operator = keyContent;
+                        console.log(`operator is ${operator}`);
+
+                        // copy the content in the new string to previousOperand :
+                        previousOperand.textContent = updatePreviousOperand;
+                        
+                        newInput = keyContent;
+                        console.log(`old input is ${oldInput}`)
+                        console.log(`new input is ${newInput}`)
+                        return;
+                    }
+
+                } else if (displayedNum != "0") {
                     console.log("currentOperand is not 0.")
                     const regexHasOperatorAndNum = /[x÷\+-]/;
 
@@ -200,7 +217,7 @@ keys.addEventListener("click", e => {
                             const regexNum2 = /[0-9]+/;
                             //num1 == previousOperand.textContent.match(regexNum1);
                             num2 = parseFloat(displayedNum);
-                            currentOperand.textContent = "0"
+                            currentOperand.textContent = "0";
 
                             //operator = operator;
                             console.log(`Operator is ${operator}.`)
@@ -219,7 +236,18 @@ keys.addEventListener("click", e => {
                             newInput = keyContent;
                             console.log(`oldInput is ${oldInput}.`)
                             console.log(`newInput is ${newInput}.`)
+                            return;
 
+
+                        } else if (newInput === "=") {
+                            previousOperand.textContent = displayedNum + " " + keyContent;
+                            //num2 = parseFloat(displayedNum);
+                            currentOperand.textContent = "0";
+                            operator = keyContent;
+                            console.log(`Operator is ${operator}.`)
+                            console.log(`num1 is ${num1}.`);
+                            console.log(`num2 is ${num2}.`);
+                            return;
 
                         } else {
                             console.log("detected number")
@@ -243,7 +271,7 @@ keys.addEventListener("click", e => {
                             console.log(`new input is ${newInput}`);
 
                             num1 = displayedNum;
-
+                            return;
                         }
                     }
                 }
@@ -379,10 +407,3 @@ function calculate() {
     console.log(`num1 is ${num1}`);
     console.log(`num2 is ${num2}`);
 }
-
-
-
-
-// check
-
-
