@@ -153,7 +153,7 @@ keys.addEventListener("click", e => {
                 
                 if (action == "subtract") {
                     // Subtraction is the only action that can be the first thing t show in displayNum (currentOperand) :
-                    console.log("SCENARIO 04: user tries to calculate negative numbers, it should be allowed.")
+                    console.log("SCENARIO 04: user tries to operate negative numbers, it should be allowed.")
                     currentOperand.textContent = keyContent;
 
                     //oldInput = newInput;
@@ -181,8 +181,20 @@ keys.addEventListener("click", e => {
                     previousOperand.textContent = currentOperand.textContent + " " + keyContent;
                     currentOperand.textContent = "0";
                     operator = keyContent;
+                    return;
                 
-                } else if (displayedNum == "0" && previousOperand.textContent.match(regexOperatorLast)) {
+                } else if (previousOperand.textContent.match(regexNewInputIsOperator)
+                && previousOperand.textContent.match(/[0-9]$/)
+                && currentOperand.textContent == result
+                && newInput == operator) {
+                    operator = keyContent;
+                    newInput = keyContent;
+                    console.log(`Operator is ${operator}.`)
+                    console.log(`New input is ${newInput}.`)
+
+                    
+
+                } else if (currentOperand.textContent == "0" && previousOperand.textContent.match(regexOperatorLast)) {
 
                     if (newInput.match(regexNewInputIsOperator) || newInput == "=") {
                         console.log("SCENARIO 07: Detected 2 actions successfully, replaced the operator to the updated one.")
@@ -200,13 +212,37 @@ keys.addEventListener("click", e => {
                         console.log(`old input is ${oldInput}`)
                         console.log(`new input is ${newInput}`)
                         return;
+
+                    } else if (newInput == currentOperand.textContent) {
+
+                        num2 = parseFloat(displayedNum);
+                        currentOperand.textContent = "0";
+
+                        //operator = operator;
+                        console.log(`Operator is ${operator}.`)
+
+                        console.log(`num1 is ${num1}.`);
+                        console.log(`num2 is ${num2}.`);
+
+
+                        previousOperand.textContent = num1 + " " + operator + " " + num2;
+                        operate(num1, num2, operator)
+
+                        operator = keyContent;
+                        console.log(`Operator is ${operator}.`)
+
+                        oldInput = newInput;
+                        newInput = keyContent;
+                        console.log(`oldInput is ${oldInput}.`)
+                        console.log(`newInput is ${newInput}.`)
+                        return;
                     }
 
-                } else if (displayedNum != "0") {
+                } else if (currentOperand.textContent != "0") {
                     console.log("currentOperand is not 0.")
-                    const regexHasOperatorAndNum = /[x÷\+-]/;
+                    const regexHasOperator = /[x÷\+-]/;
 
-                    if (previousOperand.textContent.match(regexHasOperatorAndNum)) {
+                    if (previousOperand.textContent.match(regexHasOperator)) {
                         console.log("Reaching second round calculation stage.")
 
                         if (newInput.match(/[0-9]/) /*|| oldInput == regexOperatorLast*/ ) {
@@ -227,7 +263,7 @@ keys.addEventListener("click", e => {
 
 
                             previousOperand.textContent = num1 + " " + operator + " " + num2;
-                            calculate(num1, num2, operator)
+                            operate(num1, num2, operator)
 
                             operator = keyContent;
                             console.log(`Operator is ${operator}.`)
@@ -251,12 +287,12 @@ keys.addEventListener("click", e => {
 
                         } else {
                             console.log("detected number")
-                            console.log("SCENARIO 08: The calculator should calculate the input now.")
+                            console.log("SCENARIO 08: The calculator should operate the input now.")
 
                             //num2 = parseFloat(displayedNum)
                             console.log(`num2 is ${num2}`)
 
-                            // it should calculate the first set of input :
+                            // it should operate the first set of input :
 
                             //previousOperand.textContent = previousOperand.textContent + " " + displayedNum;
                             // log the input to previousInput :
@@ -265,7 +301,7 @@ keys.addEventListener("click", e => {
                             newInput = keyContent;
 
                             // call the calculte function :
-                            calculate(num1, num2, operator)
+                            operate(num1, num2, operator)
 
                             console.log(`old input is ${oldInput}`);
                             console.log(`new input is ${newInput}`);
@@ -348,12 +384,14 @@ keys.addEventListener("click", e => {
                 currentOperand.textContent = deleteLastChar;
             }
 
-        // if the button pressed is "="(calculate) :
+        // if the button pressed is "="(operate) :
         } if (action === "calculate") {
             const regexHasOperator = /[x÷\+-]$/;
+            console.log("User press =.")
+            
             if (previousOperand.textContent.match(regexHasOperator) && (currentOperand.textContent != 0)) {
                 console.log("detected number")
-                // it calculates the given value by taking 2 values (which should be in seperate variable) and an operator :
+                // it operates the given value by taking 2 values (which should be in seperate variable) and an operator :
                 console.log("SCENARIO 07: the calculator should carry our calculation if values are provided sufficiently.")
                 num2 = parseFloat(displayedNum)
 
@@ -362,7 +400,7 @@ keys.addEventListener("click", e => {
 
                 console.log(`num2 is ${num2}`)
                 // call the calculte function :
-                calculate(parseFloat(num1), parseFloat(num2), operator)
+                operate(parseFloat(num1), parseFloat(num2), operator)
 
                 oldInput = newInput;
                 // log the new input to newInput :
@@ -372,11 +410,37 @@ keys.addEventListener("click", e => {
                 // if the input has more than one operations, the calculator should evaluate each set of number at a time ** :
                 // i.e : 12 + 7 - 5 * 3 = 42
                 return;
+
+            } else if (newInput == currentOperand.textContent) {
+                
+                num2 = parseFloat(displayedNum);
+                currentOperand.textContent = "0";
+
+                //operator = operator;
+                console.log(`Operator is ${operator}.`)
+
+                console.log(`num1 is ${num1}.`);
+                console.log(`num2 is ${num2}.`);
+
+
+                previousOperand.textContent = num1 + " " + operator + " " + num2;
+                operate(num1, num2, operator)
+
+                operator = keyContent;
+                console.log(`Operator is ${operator}.`)
+
+                oldInput = newInput;
+                newInput = keyContent;
+                console.log(`oldInput is ${oldInput}.`)
+                console.log(`newInput is ${newInput}.`)
+                return;
+
             } else if (newInput = "=") {
                 console.log("Do nothing")
                 return;
+
             } else if (num1 === result) {
-                console.log("should calculate this")
+                console.log("should operate this")
             }
         }
     }
@@ -389,7 +453,7 @@ function previousInput() {
 
 let result = ""
 
-function calculate() {
+function operate() {
     //let result = ""
     if (operator === "÷") {
         result = num1 / num2
