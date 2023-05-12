@@ -60,7 +60,7 @@ keys.addEventListener("click", e => {
                     console.log(`new input is ${newInput}`)
                     return;
                     
-                } if (previousOperand.textContent.match(regexOperatorLast)) {
+                } else if (previousOperand.textContent.match(regexOperatorLast)) {
                     currentOperand.textContent = keyContent;
 
                     oldInput = newInput;
@@ -69,12 +69,21 @@ keys.addEventListener("click", e => {
                     console.log(`new input is ${newInput}`)
                     return;
 
-                } if (result == "0" && previousOperand.textContent.match(regexHasOperator)) {
+                } else if (result == "0" && previousOperand.textContent.match(regexHasOperator)) {
                     console.log("it should carry on")
                     if (newInput.match(regexHasOperator)) {
                         previousOperand.textContent = currentOperand.textContent + " " + newInput;
                         currentOperand.textContent = keyContent;
+                        return;
 
+                    } else if (newInput == "=") {
+                        previousOperand.textContent = "0";
+                        currentOperand.textContent = keyContent;
+                        oldInput = newInput;
+                        newInput = keyContent;
+                        console.log(`old input is ${oldInput}`)
+                        console.log(`new input is ${newInput}`)
+                        return;
                     }
                 }
 
@@ -83,7 +92,7 @@ keys.addEventListener("click", e => {
 
             // append the newly pressed number at the end of the current_operand :
             if (displayedNum != "0") {
-                if (newInput.match(regexNewInputIsOperator)) {
+                if (newInput.match(regexNewInputIsOperator) || newInput == "=") {
 
                     const regexHasNumAtTheBack = /[0-9]$/;
                     const regexHasOperator = /[x÷\+-]/
@@ -91,26 +100,39 @@ keys.addEventListener("click", e => {
 
                     if (previousOperand.textContent.match(regexHasNumAtTheBack)
                         && previousOperand.textContent.match(regexHasOperator)) {
+                        console.log("It should take a number")
+                        
+                        if (newInput == /[x÷\+-]/) {
+                            // newInput is still an operator at the moment
+                            previousOperand.textContent = displayedNum + " " + newInput;
+                            currentOperand.textContent = keyContent;
 
-                        // newInput is still an operator at the moment
-                        previousOperand.textContent = displayedNum + " " + newInput;
-                        currentOperand.textContent = keyContent;
-
-                        // log the input to previousInput :
-                        oldInput = newInput;
-                        // log the new input to newInput :
-                        newInput = keyContent;
-                        console.log(`old input is ${oldInput}`)
-                        console.log(`new input is ${newInput}`)
+                            // log the input to previousInput :
+                            oldInput = newInput;
+                            // log the new input to newInput :
+                            newInput = keyContent;
+                            console.log(`old input is ${oldInput}`)
+                            console.log(`new input is ${newInput}`)
+                            num2 = keyContent;
+                            console.log(`num2 is ${num2}.`);
 
 
 
-                        operator = oldInput;
-                        console.log(`Operator is ${operator}.`)
+                            operator = oldInput;
+                            console.log(`Operator is ${operator}.`)
 
 
-                        console.log("previousOperand has numbers and an operator.")
-                        return;
+                            console.log("previousOperand has numbers and an operator.")
+                            return;
+                        } else if (newInput == "=") {
+                            previousOperand.textContent = "0";
+                            currentOperand.textContent = keyContent;
+                            oldInput = newInput;
+                            newInput = keyContent;
+                            console.log(`old input is ${oldInput}`)
+                            console.log(`new input is ${newInput}`)
+                            return;
+                        }
                     }
 
                 } else if (previousOperand.textContent == "0") {
@@ -368,20 +390,48 @@ keys.addEventListener("click", e => {
             // clear everything on log history :
             oldInput = "";
             newInput = "";
+            num1 = "";
+            num2 = "";
             console.log("all clear")
 
         // if the button pressed is "CE" :
         } if (action === "clear_entry") {
 
-            if (currentOperand.textContent.length == 1) {
-                console.log("SCENARIO 09: return currentOperand to 0.")
-                currentOperand.textContent = "0";
-            } else if (currentOperand.textContent.length > 1 ) {
+            if (currentOperand.textContent.length > 1 ) {
 
                 // it delete the last entry on currentOperand :
                 console.log("SCENARIO 10: clear last entry.")
                 let deleteLastChar = currentOperand.textContent.slice(0, -1);
                 currentOperand.textContent = deleteLastChar;
+                newInput = currentOperand.textContent.substring(currentOperand.textContent.length -1);
+
+                let getOldInput = currentOperand.textContent.substring(currentOperand.textContent.length -2);
+                oldInput = getOldInput.slice(0, -1);
+                console.log(getOldInput)
+
+                console.log(`New input is ${newInput}.`);
+                console.log(`Old input is ${oldInput}.`);
+                return;
+
+            } else if (currentOperand.textContent.length == 1) {
+                if (currentOperand.textContent != "0") {
+                console.log("SCENARIO 09: return currentOperand to 0.")
+                currentOperand.textContent = "0";
+
+                newInput = "";
+                oldInput = "";
+                num1 = "";
+                num2 = "";
+                //return;
+
+                } else if (currentOperand.textContent == "0") {
+                    previousOperand.textContent = "0";
+                    oldInput = "";
+                    newInput = "";
+                    num1 = "";
+                    num2 = "";
+                    console.log("all clear")
+                }
             }
 
         // if the button pressed is "="(operate) :
@@ -412,7 +462,7 @@ keys.addEventListener("click", e => {
                 return;
 
             } else if (newInput == currentOperand.textContent) {
-                
+
                 num2 = parseFloat(displayedNum);
                 currentOperand.textContent = "0";
 
