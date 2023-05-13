@@ -102,7 +102,7 @@ keys.addEventListener("click", e => {
                         && previousOperand.textContent.match(regexHasOperator)) {
                         console.log("It should take a number")
                         
-                        if (newInput == /[x÷\+-]/) {
+                        if (newInput.match(regexHasOperator)) {
                             // newInput is still an operator at the moment
                             previousOperand.textContent = displayedNum + " " + newInput;
                             currentOperand.textContent = keyContent;
