@@ -46,7 +46,9 @@ keys.addEventListener("click", e => {
             const regexHasOperator = /[x÷\+-]/;
 
             // update the current_operand display to the number pressed if the display shows "0" (default) :
-            if (displayedNum === "0") {
+            if (displayedNum.length >= 12) {
+                return;
+            } else if (displayedNum === "0") {
                 if (previousOperand.textContent === "0") {
 
                     currentOperand.textContent = keyContent;
@@ -513,6 +515,11 @@ function operate() {
         result = num1 - num2
     } else if (operator === "+") {
         result = num1 + num2
+    }
+    if (result.length >= 12) {
+        for (let i = 12; i < result.length; i--) {
+            console.log("it's working")
+        }
     }
     console.log(`The answer is ${result}.`)
     currentOperand.textContent = result;
