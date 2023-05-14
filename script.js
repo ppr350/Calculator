@@ -506,7 +506,7 @@ function previousInput() {
 let result = ""
 
 function operate() {
-    //let result = ""
+
     if (operator === "÷") {
         result = num1 / num2
     } else if (operator === "x") {
@@ -516,15 +516,17 @@ function operate() {
     } else if (operator === "+") {
         result = num1 + num2
     }
-    if (result.length >= 12) {
-        for (let i = 12; i < result.length; i--) {
-            console.log("it's working")
-        }
-    }
-    console.log(`The answer is ${result}.`)
+
+    return Math.floor(result * 100) / 100;
+
+
+
+
+
+    /*console.log(`The answer is ${result}.`)
     currentOperand.textContent = result;
     num1 = result;
     num2 = undefined;
     console.log(`num1 is ${num1}`);
-    console.log(`num2 is ${num2}`);
+    console.log(`num2 is ${num2}`);*/
 }
