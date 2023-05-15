@@ -517,16 +517,16 @@ function operate() {
         result = num1 + num2
     }
 
-    return Math.floor(result * 100) / 100;
+    Math.floor(result * 100) / 100;
 
 
 
 
 
-    /*console.log(`The answer is ${result}.`)
+    console.log(`The answer is ${result}.`)
     currentOperand.textContent = result;
     num1 = result;
     num2 = undefined;
     console.log(`num1 is ${num1}`);
-    console.log(`num2 is ${num2}`);*/
+    console.log(`num2 is ${num2}`);
 }
