@@ -48,7 +48,9 @@ keys.addEventListener("click", e => {
             // update the current_operand display to the number pressed if the display shows "0" (default) :
             if (displayedNum.length >= 12) {
                 return;
+         
             } else if (displayedNum === "0") {
+
                 if (previousOperand.textContent === "0") {
 
                     currentOperand.textContent = keyContent;
@@ -159,6 +161,7 @@ keys.addEventListener("click", e => {
                     console.log(`old input is ${oldInput}`);
                     console.log(`new input is ${newInput}`);
                     console.log("SCENARIO 11: currendOperand has a value and user is adding more onto it.")
+
                 }
             }
 
@@ -508,7 +511,21 @@ let result = ""
 function operate() {
 
     if (operator === "÷") {
-        result = num1 / num2
+        if (num2 = "0") {
+            currentOperand.textContent = "0";
+            previousOperand.textContent = "0";
+
+            // clear everything on log history :
+            oldInput = "";
+            newInput = "";
+            num1 = "";
+            num2 = "";
+            console.log("all clear")
+            alert("You've been Rick Rolled!")
+            return;
+        } else {
+            result = num1 / num2
+        }
     } else if (operator === "x") {
         result = num1 * num2
     } else if (operator === "-") {
