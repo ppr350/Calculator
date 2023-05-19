@@ -511,7 +511,7 @@ let result = ""
 function operate() {
 
     if (operator === "÷") {
-        if (num2 = "0") {
+        if (num2 == "0") {
             currentOperand.textContent = "0";
             previousOperand.textContent = "0";
 
@@ -534,16 +534,33 @@ function operate() {
         result = num1 + num2
     }
 
-    Math.floor(result * 100) / 100;
-
-
-
-
 
     console.log(`The answer is ${result}.`)
-    currentOperand.textContent = result;
+
     num1 = result;
     num2 = undefined;
     console.log(`num1 is ${num1}`);
     console.log(`num2 is ${num2}`);
+    if (result.toString().length < 12) {
+        console.log(`The answer is ${result}.`)
+        currentOperand.textContent = result;
+        return result;
+
+    } else {
+        let exponentialResult = result.toExponential(4);
+        result = exponentialResult;
+        console.log(result)
+        currentOperand.textContent = result;
+        //return result;
+    }
+
+
+
+  
+
+
+
+
+
+
 }
