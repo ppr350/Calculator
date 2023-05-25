@@ -307,6 +307,20 @@ keys.addEventListener("click", e => {
                 return;
 
             // otherwise, append it to displayNum :
+            } else if (currentOperand.textContent = result && previousOperand.textContent.match(/[x÷\+-]/)) {
+
+                // clear everything on screen (default mode):
+                currentOperand.textContent = "0";
+                previousOperand.textContent = "0";
+
+                // clear everything on log history :
+                oldInput = "";
+                newInput = "";
+                num1 = "";
+                num2 = "";
+
+                currentOperand.textContent += keyContent;
+                
             } else {
 
                 currentOperand.textContent = displayedNum + keyContent
@@ -328,6 +342,7 @@ keys.addEventListener("click", e => {
             newInput = "";
             num1 = "";
             num2 = "";
+            operator = ""
 
         // if the button pressed is "CE" :
         } if (action === "clear_entry") {
@@ -369,7 +384,7 @@ keys.addEventListener("click", e => {
         } if (action === "calculate") {
 
             const regexHasOperatorLast = /[x÷\+-]$/;
-            
+
             if (previousOperand.textContent.match(regexHasOperatorLast) && (currentOperand.textContent != 0)) {
 
                 num2 = parseFloat(displayedNum)
@@ -463,3 +478,66 @@ function operate() {
     }
 
 }
+
+window.addEventListener("keydown", function (e) {
+
+    document.querySelector(`button[data-action="${e.key}"]`)
+
+    console.log(e);
+});
+
+window.addEventListener("keydown", function (e) {
+    if (e.key == '=') {
+        console.log("=");
+        document.getElementById("=").click();
+    } else if (e.key == 'Backspace') {
+        console.log("Backspace")
+        document.getElementById("ce").click();
+    } else if (e.key == 'x') {
+        console.log("x")
+        document.getElementById("x").click();
+    } else if (e.key == '-') {
+        console.log("-")
+        document.getElementById("-").click();
+    } else if (e.key == '+') {
+        console.log("+")
+        document.getElementById("+").click();
+    } else if (e.key == '/') {
+        console.log("÷")
+        document.getElementById("÷").click();
+    } else if (e.key == '.') {
+        console.log(".")
+        document.getElementById(".").click();
+    } else if (e.key == '0') {
+        console.log("0")
+        document.getElementById("0").click();
+    } else if (e.key == '1') {
+        console.log("1")
+        document.getElementById("1").click();
+    } else if (e.key == '2') {
+        console.log("2")
+        document.getElementById("2").click();
+    } else if (e.key == '3') {
+        console.log("3")
+        document.getElementById("3").click();
+    } else if (e.key == '4') {
+        console.log("4")
+        document.getElementById("4").click();
+    } else if (e.key == '5') {
+        console.log("5")
+        document.getElementById("5").click();
+    } else if (e.key == '6') {
+        console.log("6")
+        document.getElementById("6").click();
+    } else if (e.key == '7') {
+        console.log("7")
+        document.getElementById("7").click();
+    } else if (e.key == '8') {
+        console.log("8")
+        document.getElementById("8").click();
+    } else if (e.key == '9') {
+        console.log("9")
+        document.getElementById("9").click();
+    }
+}) 
+
