@@ -134,7 +134,7 @@ keys.addEventListener("click", e => {
                     oldInput = newInput;
                     newInput = keyContent;
 
-                } else if (displayedNum != "0" 
+                } else if (displayedNum != "0"
                 && previousOperand.textContent.match(regexOperatorLast)
                 && newInput != regexHasOperator) {
 
@@ -403,6 +403,10 @@ keys.addEventListener("click", e => {
 
                 return;
 
+            } else if (num1 === result) {
+
+                return;
+
             } else if (newInput == currentOperand.textContent) {
 
                 num2 = parseFloat(displayedNum);
@@ -418,12 +422,12 @@ keys.addEventListener("click", e => {
 
                 return;
 
-            } else if (newInput = "=") {
+            } else if (newInput == "=") {
 
                 return;
 
-            }/* else if (num1 === result) {
-                console.log("should operate this")
+            } /* else if (previousOperand.textContent = "0") {
+                if (oldInput)
             }*/
         }
     }
