@@ -302,24 +302,49 @@ keys.addEventListener("click", e => {
 
             // if displayNum contains a decimal point :
             if (displayedNum.includes(".")) {
+                if (displayedNum != result) {
 
-                // ignore the second decimal point and return it :
-                return;
+                    // ignore the second decimal point and return it :
+                    return;
+
+                } else if (displayedNum == result) {
+
+                    oldInput = "";
+                    newInput = keyContent;
+                    num1 = "";
+                    num2 = "";
+
+                    previousOperand.textContent = "0";
+                    currentOperand.textContent = "0" + keyContent;
+
+                }
 
             // otherwise, append it to displayNum :
-            } else if (currentOperand.textContent = result && previousOperand.textContent.match(/[x÷\+-]/)) {
+            } else if (currentOperand.textContent = result 
+            && previousOperand.textContent.match(/^[0-9]+/)
+            && previousOperand.textContent.match(/[x÷\+-]/)
+            && previousOperand.textContent.match(/[0-9]+$/)) {
+                if (newInput = "=") {
 
-                // clear everything on screen (default mode):
-                currentOperand.textContent = "0";
-                previousOperand.textContent = "0";
+                    // clear everything on screen (default mode):
+                    currentOperand.textContent = "0";
+                    previousOperand.textContent = "0";
 
-                // clear everything on log history :
-                oldInput = "";
-                newInput = "";
-                num1 = "";
-                num2 = "";
+                    // clear everything on log history :
+                    oldInput = "";
+                    newInput = "";
+                    num1 = "";
+                    num2 = "";
 
-                currentOperand.textContent += keyContent;
+                    currentOperand.textContent += keyContent;
+                    console.log("successful")
+                    return
+
+                } else if (newInput == "+" || newInput == "-" || newInput == "x" || newInput == "÷") {
+
+                    console.log("should not behave the way it does.")
+                    return;
+                }
                 
             } else {
 
