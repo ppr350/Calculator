@@ -95,9 +95,15 @@ keys.addEventListener("click", e => {
             // append the newly pressed number at the end of the current_operand :
             if (displayedNum != "0") {
 
-                if (newInput.match(regexHasOperator) || newInput == "=") {
+               if (newInput.match(regexHasOperator) || newInput == "=") {
 
-                    if (previousOperand.textContent.match(regexNumberLast)
+                    if (displayedNum == "-") {
+
+                        currentOperand.textContent += keyContent;
+                        oldInput = "0";
+                        newInput = keyContent;
+
+                    } else if (previousOperand.textContent.match(regexNumberLast)
                         && previousOperand.textContent.match(regexHasOperator)) {
                         
                         if (newInput.match(regexHasOperator)) {
@@ -237,7 +243,7 @@ keys.addEventListener("click", e => {
                         if (newInput.match(/[0-9]/)) {
 
                             console.log("SCENARIO 10: Second round of calculation.")
-                            previousOperand.textContent = displayedNum + " " + operator;
+                            previousOperand.textContent = displayedNum + " " + keyContent;
                             
                             const regexNum1 = /^[0-9]+/;
                             const regexNum2 = /[0-9]+/;
@@ -307,7 +313,7 @@ keys.addEventListener("click", e => {
                     // ignore the second decimal point and return it :
                     return;
 
-                } else if (displayedNum == result) {
+                }/* else if (displayedNum == result) {
 
                     oldInput = "";
                     newInput = keyContent;
@@ -317,14 +323,37 @@ keys.addEventListener("click", e => {
                     previousOperand.textContent = "0";
                     currentOperand.textContent = "0" + keyContent;
 
-                }
+                }*/
 
             // otherwise, append it to displayNum :
-            } else if (currentOperand.textContent = result 
+            } else if (displayedNum == result) {
+
+                /*oldInput = "";
+                newInput = keyContent;
+                num1 = "";
+                num2 = "";*/
+
+                previousOperand.textContent = result + " " + newInput;
+                currentOperand.textContent = "0" + keyContent;
+                num1 = result;
+                num2 = "";
+                oldInput = "0";
+                newInput = keyContent
+
+            } else if (newInput == "-") {
+
+                previousOperand.textContent = result;
+                currentOperand.textContent = "0" + keyContent;
+
+                oldInput = "0";
+                newInput = keyContent;
+            }
+            
+            else if (currentOperand.textContent = result 
             && previousOperand.textContent.match(/^[0-9]+/)
             && previousOperand.textContent.match(/[x÷\+-]/)
             && previousOperand.textContent.match(/[0-9]+$/)) {
-                if (newInput = "=") {
+                if (newInput == "=") {
 
                     // clear everything on screen (default mode):
                     currentOperand.textContent = "0";
@@ -341,8 +370,20 @@ keys.addEventListener("click", e => {
                     return
 
                 } else if (newInput == "+" || newInput == "-" || newInput == "x" || newInput == "÷") {
+                    console.log(keyContent)
 
                     console.log("should not behave the way it does.")
+                    previousOperand.textContent = result + " " + newInput;
+                    num1 = result;
+                    operator = newInput;
+                    currentOperand.textContent = "0" + keyContent;
+
+                    oldInput = "0";
+                    newInput = keyContent;
+                    console.log(`old input is ${oldInput} and new input is ${newInput}.`)
+
+                    num2 = "";
+                    console.log(`num1 is ${num1} and num2 is ${num2}.`)
                     return;
                 }
                 
@@ -499,13 +540,12 @@ function operate() {
         return result;
 
     } else {
-        let exponentialResult = result.toExponential(4);
+        let exponentialResult = result.toExponential(5);
         result = exponentialResult;
 
         currentOperand.textContent = result;
 
     }
-
 }
 
 window.addEventListener("keydown", function (e) {
