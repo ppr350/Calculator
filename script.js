@@ -531,7 +531,7 @@ function operate() {
 
     console.log(`The answer is ${result}.`)
 
-    num1 = result;
+    num1 = Math.round((result + Number.EPSILON) * 100) / 100;
     num2 = undefined;
 
     if (result.toString().length < 12) {
@@ -556,7 +556,7 @@ window.addEventListener("keydown", function (e) {
 });
 
 window.addEventListener("keydown", function (e) {
-    if (e.key == '=') {
+    if (e.key == '=' || e.key == 'Enter') {
         console.log("=");
         document.getElementById("=").click();
     } else if (e.key == 'Backspace') {
