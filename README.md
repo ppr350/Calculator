@@ -5,7 +5,7 @@
 ### When user press a button, it has to figure out what button was pressed:
 
 #### if the button is a number :
-- it registers the number
+- It registers the number
 - It shows the number on the current screen
 - If the current screen is on its default mode, it shows “0”. In this case, the number replaces the “0”
 - It can also be after one of the operators was entered. In this case, the previous screen shows all the previously entered values
@@ -35,7 +35,7 @@
 ### How to make the calculator remembers the values user enter for calculation later
 
 #### For calculation :
-- Create three empty variable on a global scope  called num1, num2 and operator
+- Create three empty variable on a global scope called num1, num2 and operator
 - Create an event listener, when an operator is entered under normal behaviour (such as when current screen has a value), it triggers the event listener to take the number value and store it to num1, and take the operator value to operator
 - To take the num2, an event listener is needed to listen to either an equal button
 - Alternatively, if the calculator detects a second operator is entered when there are sufficient values inside num1, num2 and operator, the second operator that has just entered should trigger the calculation. The answer therefore should displayed in previousOperand, and be stored in now newly reset num1, and the last operator that has triggered the calculation is now operator, the next set of number will be num2
