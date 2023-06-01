@@ -328,41 +328,17 @@ keys.addEventListener("click", e => {
             // otherwise, append it to displayNum :
             } else if (displayedNum == result) {
 
-                if (newInput == "+" || newInput == "-" || newInput == "x" || newInput == "÷") {
-
-                    previousOperand.textContent = result + " " + newInput;
-                    currentOperand.textContent = "0" + keyContent;
-                    num1 = result;
-                    num2 = "";
-                    oldInput = "0";
-                    newInput = keyContent;
-
-                } else if (newInput = "=") {
-
-                    // clear everything on screen (default mode):
-                    currentOperand.textContent = "0" + keyContent;
-                    previousOperand.textContent = "0";
-
-                    // clear everything on log history :
-                    oldInput = "";
-                    newInput = keyContent;
-                    num1 = "";
-                    num2 = "";
-                    operator = ""
-                    
-                }
-
-            } else if (num1 = result) { 
-
-                currentOperand.textContent = ".";
-                previousOperand.textContent = "0";
-    
-                // clear everything on log history :
-                oldInput = "";
-                newInput = "";
+                /*oldInput = "";
+                newInput = keyContent;
                 num1 = "";
+                num2 = "";*/
+
+                previousOperand.textContent = result + " " + newInput;
+                currentOperand.textContent = "0" + keyContent;
+                num1 = result;
                 num2 = "";
-                operator = ""
+                oldInput = "0";
+                newInput = keyContent
 
             } else if (newInput == "-") {
 
@@ -394,7 +370,6 @@ keys.addEventListener("click", e => {
                     return
 
                 } else if (newInput == "+" || newInput == "-" || newInput == "x" || newInput == "÷") {
-
                     console.log(keyContent)
 
                     console.log("should not behave the way it does.")
