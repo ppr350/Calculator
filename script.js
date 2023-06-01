@@ -313,7 +313,7 @@ keys.addEventListener("click", e => {
                     // ignore the second decimal point and return it :
                     return;
 
-                }/* else if (displayedNum == result) {
+                } else if (displayedNum == result) {
 
                     oldInput = "";
                     newInput = keyContent;
@@ -323,23 +323,9 @@ keys.addEventListener("click", e => {
                     previousOperand.textContent = "0";
                     currentOperand.textContent = "0" + keyContent;
 
-                }*/
+                };
 
             // otherwise, append it to displayNum :
-            } else if (displayedNum == result) {
-
-                /*oldInput = "";
-                newInput = keyContent;
-                num1 = "";
-                num2 = "";*/
-
-                previousOperand.textContent = result + " " + newInput;
-                currentOperand.textContent = "0" + keyContent;
-                num1 = result;
-                num2 = "";
-                oldInput = "0";
-                newInput = keyContent
-
             } else if (newInput == "-") {
 
                 previousOperand.textContent = result;
@@ -349,7 +335,7 @@ keys.addEventListener("click", e => {
                 newInput = keyContent;
             }
             
-            else if (currentOperand.textContent = result 
+            else if (currentOperand.textContent == result 
             && previousOperand.textContent.match(/^[0-9]+/)
             && previousOperand.textContent.match(/[x÷\+-]/)
             && previousOperand.textContent.match(/[0-9]+$/)) {
