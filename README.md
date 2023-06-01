@@ -44,3 +44,7 @@
 - 2 variable are created in order to record the last 2 actions.
 - newInput is the button that user has just entered, and the string inside newInput will be moved to oldInput is when the user enters a new button in order to store the latest input
 - If the oldInput value is an operator (addition, deduction, multiplication or division), and newInput is also an operator. It should trigger a code to : 1. Update the operator in previousOperand to the newest one 2. Update the value inside the operator variable to the newest value
+
+#### Features:
+- Keyboard support
+- Responsive to all screen sizes
